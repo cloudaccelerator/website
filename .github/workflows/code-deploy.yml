@@ -1,4 +1,5 @@
 name: code-deploy
+run-name: "[code-deploy] ${{ github.event.workflow_run.head_commit.message }}"
 
 on:
   push:
