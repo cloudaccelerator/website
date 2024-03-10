@@ -34,7 +34,7 @@ resource "azurerm_static_web_app_custom_domain" "website" {
 
 resource "azurerm_static_web_app_custom_domain" "website_www" {
   static_web_app_id = azurerm_static_web_app.website.id
-  domain_name       = "www.${data.azurerm_dns_zone.cloudaccelerator.name}"
+  domain_name       = azurerm_dns_cname_record.website.fqdn
   validation_type   = "cname-delegation"
 }
 
@@ -68,7 +68,7 @@ resource "azurerm_dns_cname_record" "website" {
   zone_name           = data.azurerm_dns_zone.cloudaccelerator.name
   resource_group_name = data.azurerm_dns_zone.cloudaccelerator.resource_group_name
 
-  name = "@"
+  name = "www"
   ttl  = 3600
 
   record = azurerm_static_web_app.website.default_host_name
