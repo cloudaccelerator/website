@@ -34,7 +34,7 @@ resource "azurerm_static_web_app_custom_domain" "website" {
 
 resource "azurerm_static_web_app_custom_domain" "website_www" {
   static_web_app_id = azurerm_static_web_app.website.id
-  domain_name       = azurerm_dns_cname_record.website.fqdn
+  domain_name       = trimsuffix(azurerm_dns_cname_record.website.fqdn, ".")
   validation_type   = "cname-delegation"
 }
 
