@@ -1,5 +1,5 @@
 name: terraform
-run-name: "[terraform-${{ github.event_name == 'pull_request' && 'verify' || 'deploy' }}] ${{ github.event.head_commit.message }}"
+run-name: "[terraform-${{ github.event_name == 'pull_request' && 'verify' || 'deploy' }}] ${{ github.event_name == 'pull_request' && github.event.pull_request.title || github.event.head_commit.message }}"
 
 on:
   pull_request:
