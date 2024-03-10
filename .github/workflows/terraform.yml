@@ -52,7 +52,7 @@ jobs:
       - name: tflint
         if: github.event_name == 'pull_request'
         run: |
-          tflint .
+          tflint
       - name: Terraform validate & format
         if: github.event_name == 'pull_request'
         run: |
