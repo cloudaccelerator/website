@@ -5,6 +5,10 @@ data "azurerm_dns_zone" "cloudaccelerator" {
 resource "azurerm_resource_group" "website" {
   name     = "website"
   location = "West Europe"
+
+  tags = {
+    repo = var.repo
+  }
 }
 
 resource "azurerm_static_web_app" "website" {
@@ -16,6 +20,10 @@ resource "azurerm_static_web_app" "website" {
   sku_size = "Free"
 
   preview_environments_enabled = false
+
+  tags = {
+    repo = var.repo
+  }
 }
 
 resource "azurerm_static_web_app_custom_domain" "website" {
