@@ -1,5 +1,5 @@
 name: terraform
-run-name: "[terraform-${{ github.event_name == 'pull_request' && 'verify' || 'deploy' }}] ${{ github.event.workflow_run.head_commit.message }}"
+run-name: "[terraform-${{ github.event_name == 'pull_request' && 'verify' || 'deploy' }}] ${{ github.event.head_commit.message }}"
 
 on:
   pull_request:
@@ -52,7 +52,7 @@ jobs:
           terraform fmt -check -recursive -diff
       - name: Trivy scan
         if: github.event_name == 'pull_request'
-        uses: aquasecurity/trivy-action@0.18
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: config
           scan-ref: ./infra
