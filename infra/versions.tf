@@ -13,6 +13,6 @@ terraform {
     storage_account_name = "cloudacctfbackend"
     container_name       = "tfstate"
     key                  = "website.tfstate"
-    use_azuread_auth     = true
+    use_oidc             = true
   }
 }
