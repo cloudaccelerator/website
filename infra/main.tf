@@ -2,19 +2,14 @@ data "azurerm_dns_zone" "cloudaccelerator" {
   name = "cloudaccelerator.dev"
 }
 
-resource "azurerm_resource_group" "website" {
-  name     = "website"
-  location = "West Europe"
-
-  tags = {
-    repo = var.repo
-  }
+data "azurerm_resource_group" "website" {
+  name = "website"
 }
 
 resource "azurerm_static_web_app" "website" {
   name                = "website"
-  resource_group_name = azurerm_resource_group.website.name
-  location            = azurerm_resource_group.website.location
+  resource_group_name = data.azurerm_resource_group.website.name
+  location            = data.azurerm_resource_group.website.location
 
   sku_tier = "Free"
   sku_size = "Free"
